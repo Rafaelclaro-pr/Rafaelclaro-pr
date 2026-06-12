@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitTrack — Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">💪</span>
+        <span class="logo-text">FitTrack</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item" data-page="dashboard"><span class="nav-icon">📊</span> Dashboard</a>
+      <a href="workout.html"   class="nav-item" data-page="workout"><span class="nav-icon">🏋️</span> Treinos</a>
+      <a href="nutrition.html" class="nav-item" data-page="nutrition"><span class="nav-icon">🥗</span> Nutrição</a>
+      <a href="profile.html"   class="nav-item" data-page="profile"><span class="nav-icon">👤</span> Perfil</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="sidebar-user"></div>
+      <button class="btn btn-outline btn-sm" onclick="logout()">Sair</button>
+    </div>
+  </aside>
+
+  <div class="app-layout">
+    <main class="main-content">
+      <div class="mobile-topbar">
+        <div class="logo"><span class="logo-icon">💪</span><span class="logo-text">FitTrack</span></div>
+        <button class="hamburger" id="hamburger">☰</button>
+      </div>
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Dashboard</h1>
+          <p class="page-subtitle" id="today-date"></p>
+        </div>
+        <a href="nutrition.html" class="btn btn-primary">+ Adicionar Refeição</a>
+      </div>
+
+      <!-- Dynamic message -->
+      <div id="message-box" class="alert alert-success hidden" style="margin-bottom:20px;"></div>
+
+      <!-- Stats row -->
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Meta Calórica</div>
+          <div class="stat-value accent" id="stat-meta">—</div>
+          <div class="stat-sub">kcal / dia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Consumidas Hoje</div>
+          <div class="stat-value" id="stat-consumidas">—</div>
+          <div class="stat-sub">kcal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Balanço</div>
+          <div class="stat-value" id="stat-balanco">—</div>
+          <div class="stat-sub" id="stat-balanco-label">kcal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Projeção Semanal</div>
+          <div class="stat-value" id="stat-projecao">—</div>
+          <div class="stat-sub">kg / semana</div>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="card" style="margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-size:14px;font-weight:500;">Progresso Calórico</span>
+          <span id="progress-label" style="font-size:13px;color:var(--text-secondary);">0 / 0 kcal</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-bar" id="cal-progress" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Macros + Last Workout -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Macronutrientes de Hoje</div>
+          <div style="position:relative;height:200px;margin:12px auto;max-width:200px;">
+            <canvas id="macro-chart"></canvas>
+          </div>
+          <div class="macro-grid">
+            <div class="macro-item">
+              <div class="macro-val prot" id="macro-prot">0g</div>
+              <div class="macro-name">Proteínas</div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-val hid" id="macro-hid">0g</div>
+              <div class="macro-name">Hidratos</div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-val gord" id="macro-gord">0g</div>
+              <div class="macro-name">Gorduras</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Último Treino</div>
+          <div id="last-workout-content">
+            <div class="empty-state" style="padding:30px 0;">
+              <div class="empty-icon">🏋️</div>
+              <p>Nenhum treino registado</p>
+              <a href="workout.html" class="btn btn-outline btn-sm">Registar Treino</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

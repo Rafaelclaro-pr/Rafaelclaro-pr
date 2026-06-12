@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitTrack — Entrar</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="auth-logo">
+      <div class="logo-emoji">💪</div>
+      <h1>FitTrack</h1>
+      <p>Monitoriza treinos e nutrição diária</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="tab-btn active" id="tab-login" onclick="showTab('login')">Entrar</button>
+      <button class="tab-btn" id="tab-register" onclick="showTab('register')">Criar conta</button>
+    </div>
+
+    <!-- Login -->
+    <form id="login-form" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" required placeholder="o.teu@email.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="login-pass">Password</label>
+        <input type="password" id="login-pass" required placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="login-btn">Entrar</button>
+      <div class="error-msg" id="login-error"></div>
+    </form>
+
+    <!-- Register -->
+    <form id="register-form" class="hidden" onsubmit="handleRegister(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" id="reg-nome" required placeholder="O teu nome">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="reg-email" required placeholder="o.teu@email.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="reg-pass" required placeholder="Mínimo 6 caracteres" minlength="6">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Peso (kg)</label>
+          <input type="number" id="reg-peso" step="0.1" min="30" max="300" placeholder="70">
+        </div>
+        <div class="form-group">
+          <label>Altura (cm)</label>
+          <input type="number" id="reg-altura" min="100" max="250" placeholder="175">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Idade</label>
+          <input type="number" id="reg-idade" min="10" max="120" placeholder="25">
+        </div>
+        <div class="form-group">
+          <label>Sexo</label>
+          <select id="reg-sexo">
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nível de Atividade</label>
+          <select id="reg-atividade">
+            <option value="sedentario">Sedentário</option>
+            <option value="leve">Leve</option>
+            <option value="moderado" selected>Moderado</option>
+            <option value="ativo">Ativo</option>
+            <option value="muito_ativo">Muito Ativo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Objetivo</label>
+          <select id="reg-objetivo">
+            <option value="perder">Perder Peso</option>
+            <option value="manter" selected>Manter Peso</option>
+            <option value="ganhar">Ganhar Massa</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="reg-btn">Criar Conta</button>
+      <div class="error-msg" id="register-error"></div>
+    </form>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script>
+    if (getToken()) window.location.href = 'dashboard.html';
+
+    function showTab(tab) {
+      document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
+      document.getElementById('register-form').classList.toggle('hidden', tab !== 'register');
+      document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+      document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('login-btn');
+      btn.disabled = true;
+      btn.textContent = 'A entrar...';
+      clearError('login-error');
+      try {
+        const data = await api.login(
+          document.getElementById('login-email').value,
+          document.getElementById('login-pass').value
+        );
+        setToken(data.access_token);
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        showError('login-error', err.message);
+        btn.disabled = false;
+        btn.textContent = 'Entrar';
+      }
+    }
+
+    async function handleRegister(e) {
+      e.preventDefault();
+      const btn = document.getElementById('reg-btn');
+      btn.disabled = true;
+      btn.textContent = 'A criar conta...';
+      clearError('register-error');
+
+      const payload = {
+        nome:             document.getElementById('reg-nome').value,
+        email:            document.getElementById('reg-email').value,
+        password:         document.getElementById('reg-pass').value,
+        peso_kg:          parseFloat(document.getElementById('reg-peso').value) || null,
+        altura_cm:        parseFloat(document.getElementById('reg-altura').value) || null,
+        idade:            parseInt(document.getElementById('reg-idade').value) || null,
+        sexo:             document.getElementById('reg-sexo').value,
+        nivel_atividade:  document.getElementById('reg-atividade').value,
+        objetivo:         document.getElementById('reg-objetivo').value,
+      };
+
+      try {
+        await api.register(payload);
+        const loginData = await api.login(payload.email, payload.password);
+        setToken(loginData.access_token);
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        showError('register-error', err.message);
+        btn.disabled = false;
+        btn.textContent = 'Criar Conta';
+      }
+    }
+  </script>
+</body>
+</html>

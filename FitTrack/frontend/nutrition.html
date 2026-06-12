@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitTrack — Nutrição</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo"><span class="logo-icon">💪</span><span class="logo-text">FitTrack</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item" data-page="dashboard"><span class="nav-icon">📊</span> Dashboard</a>
+      <a href="workout.html"   class="nav-item" data-page="workout"><span class="nav-icon">🏋️</span> Treinos</a>
+      <a href="nutrition.html" class="nav-item" data-page="nutrition"><span class="nav-icon">🥗</span> Nutrição</a>
+      <a href="profile.html"   class="nav-item" data-page="profile"><span class="nav-icon">👤</span> Perfil</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="sidebar-user"></div>
+      <button class="btn btn-outline btn-sm" onclick="logout()">Sair</button>
+    </div>
+  </aside>
+
+  <div class="app-layout">
+    <main class="main-content">
+      <div class="mobile-topbar">
+        <div class="logo"><span class="logo-icon">💪</span><span class="logo-text">FitTrack</span></div>
+        <button class="hamburger" id="hamburger">☰</button>
+      </div>
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Nutrição</h1>
+          <p class="page-subtitle">Regista as tuas refeições diárias</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div class="date-nav">
+            <input type="date" id="selected-date" onchange="loadDay()">
+          </div>
+          <button class="btn btn-primary" onclick="showModal('modal-add-refeicao')">+ Refeição</button>
+        </div>
+      </div>
+
+      <!-- Daily totals -->
+      <div class="stats-grid" id="day-stats" style="margin-bottom:20px;">
+        <div class="stat-card">
+          <div class="stat-label">Calorias</div>
+          <div class="stat-value accent" id="total-cal">0</div>
+          <div class="stat-sub">kcal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Proteínas</div>
+          <div class="stat-value" style="color:#3B82F6;" id="total-prot">0g</div>
+          <div class="stat-sub">proteínas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Hidratos</div>
+          <div class="stat-value" style="color:#F59E0B;" id="total-hid">0g</div>
+          <div class="stat-sub">hidratos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Gorduras</div>
+          <div class="stat-value" style="color:#EF4444;" id="total-gord">0g</div>
+          <div class="stat-sub">gorduras</div>
+        </div>
+      </div>
+
+      <!-- Meals list -->
+      <div id="meals-container">
+        <div class="empty-state">
+          <div class="empty-icon">🥗</div>
+          <p>A carregar refeições...</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal: Add Refeição -->
+  <div class="modal-overlay" id="modal-add-refeicao">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Nova Refeição</span>
+        <button class="modal-close" onclick="hideModal('modal-add-refeicao')">✕</button>
+      </div>
+      <form onsubmit="handleCreateRefeicao(event)">
+        <div class="form-group">
+          <label>Tipo de Refeição</label>
+          <select id="refeicao-tipo">
+            <option value="pequeno_almoco">Pequeno-almoço</option>
+            <option value="almoco">Almoço</option>
+            <option value="jantar">Jantar</option>
+            <option value="snack">Snack</option>
+          </select>
+        </div>
+        <div class="error-msg" id="refeicao-error"></div>
+        <div style="display:flex;gap:10px;margin-top:4px;">
+          <button type="button" class="btn btn-outline" onclick="hideModal('modal-add-refeicao')">Cancelar</button>
+          <button type="submit" class="btn btn-primary" style="flex:1;">Criar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add Alimento -->
+  <div class="modal-overlay" id="modal-add-alimento">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Adicionar Alimento</span>
+        <button class="modal-close" onclick="hideModal('modal-add-alimento')">✕</button>
+      </div>
+      <form onsubmit="handleAddAlimento(event)">
+        <div class="form-group">
+          <label>Nome do Alimento</label>
+          <input type="text" id="alimento-nome" required placeholder="Ex: Frango grelhado 150g">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Calorias (kcal)</label>
+            <input type="number" id="alimento-cal" required min="0" step="0.1" placeholder="250">
+          </div>
+          <div class="form-group">
+            <label>Proteínas (g)</label>
+            <input type="number" id="alimento-prot" min="0" step="0.1" placeholder="30" value="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Hidratos (g)</label>
+            <input type="number" id="alimento-hid" min="0" step="0.1" placeholder="0" value="0">
+          </div>
+          <div class="form-group">
+            <label>Gorduras (g)</label>
+            <input type="number" id="alimento-gord" min="0" step="0.1" placeholder="8" value="0">
+          </div>
+        </div>
+        <div class="error-msg" id="alimento-error"></div>
+        <div style="display:flex;gap:10px;margin-top:4px;">
+          <button type="button" class="btn btn-outline" onclick="hideModal('modal-add-alimento')">Cancelar</button>
+          <button type="submit" class="btn btn-primary" style="flex:1;">Adicionar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/nutrition.js"></script>
+</body>
+</html>
