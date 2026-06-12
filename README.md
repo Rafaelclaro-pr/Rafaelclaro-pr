@@ -62,6 +62,22 @@
 
 ---
 
+## 🗂️ Featured Projects
+
+### [Sistema de Gestão de Coworking](https://github.com/Rafaelclaro-pr/coworking-db-main)
+> Academic database project — Computer Engineering @ Universidade de Aveiro
+
+A full coworking space management system featuring client registration, membership plans, room/desk reservations, and payments. Built with a SQL Server database (triggers, stored procedures, views, temporal tables) and a C# WinForms desktop app.
+
+<p>
+  <img src="https://img.shields.io/badge/SQL%20Server-CC2927?style=flat-square&logo=microsoft-sql-server&logoColor=white" />
+  <img src="https://img.shields.io/badge/C%23-239120?style=flat-square&logo=c-sharp&logoColor=white" />
+  <img src="https://img.shields.io/badge/.NET%208-512BD4?style=flat-square&logo=dotnet&logoColor=white" />
+  <img src="https://img.shields.io/badge/WinForms-0078D7?style=flat-square&logo=windows&logoColor=white" />
+</p>
+
+---
+
 ## 🚀 What I'm Looking For
 
 I'm a Computer Engineering student at **Universidade de Aveiro** actively seeking internship or junior developer opportunities where I can:
