@@ -79,7 +79,7 @@ A full-stack fitness tracking app with workout logging, daily nutrition monitori
 
 ---
 
-### [🍕 Pizza Delivery App](https://github.com/Rafaelclaro-pr/Rafaelclaro-pr/tree/main/Pizza_APP)
+### [🍕 Pizza Delivery App](https://github.com/Rafaelclaro-pr/pizza-app)
 > Mobile app — Flutter + Firebase + BLoC
 
 A pizza ordering mobile app with Firebase Authentication (sign-up/sign-in), Firestore data fetching, and a clean Material 3 UI. Features a pizza catalogue with veg/spice tags, discount pricing, nutritional macros, and a detail screen.
