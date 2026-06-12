@@ -64,6 +64,21 @@
 
 ## 🗂️ Featured Projects
 
+### [💪 FitTrack](https://github.com/Rafaelclaro-pr/Rafaelclaro-pr/tree/main/FitTrack)
+> Gym & nutrition tracking web app
+
+A full-stack fitness tracking app with workout logging, daily nutrition monitoring and a personalised calorie balance calculator. REST API with JWT authentication, interactive charts and a vanilla JS frontend.
+
+<p>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white" />
+</p>
+
+---
+
 ### [🍕 Pizza Delivery App](https://github.com/Rafaelclaro-pr/Rafaelclaro-pr/tree/main/Pizza_APP)
 > Mobile app — Flutter + Firebase + BLoC
 
