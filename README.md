@@ -64,6 +64,20 @@
 
 ## 🗂️ Featured Projects
 
+### [☕ Coffee Order App](https://github.com/Rafaelclaro-pr/coffee-order-app)
+> Android ordering app — Kotlin + Firebase
+
+A native Android coffee ordering app with category browsing, item detail, shopping cart and Firebase Realtime Database integration. Built with MVVM architecture, RecyclerView adapters and a warm brown UI theme.
+
+<p>
+  <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white" />
+  <img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" />
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black" />
+  <img src="https://img.shields.io/badge/MVVM-grey?style=flat-square" />
+</p>
+
+---
+
 ### [💪 FitTrack](https://github.com/Rafaelclaro-pr/Rafaelclaro-pr/tree/main/FitTrack)
 > Gym & nutrition tracking web app
 
