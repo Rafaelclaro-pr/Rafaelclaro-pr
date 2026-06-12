@@ -78,7 +78,7 @@ A native Android coffee ordering app with category browsing, item detail, shoppi
 
 ---
 
-### [💪 FitTrack](https://github.com/Rafaelclaro-pr/Rafaelclaro-pr/tree/main/FitTrack)
+### [💪 FitTrack](https://github.com/Rafaelclaro-pr/Fittrack)
 > Gym & nutrition tracking web app
 
 A full-stack fitness tracking app with workout logging, daily nutrition monitoring and a personalised calorie balance calculator. REST API with JWT authentication, interactive charts and a vanilla JS frontend.
