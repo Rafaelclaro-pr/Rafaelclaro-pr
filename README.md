@@ -64,6 +64,20 @@
 
 ## 🗂️ Featured Projects
 
+### [🍕 Pizza Delivery App](https://github.com/Rafaelclaro-pr/Rafaelclaro-pr/tree/main/Pizza_APP)
+> Mobile app — Flutter + Firebase + BLoC
+
+A pizza ordering mobile app with Firebase Authentication (sign-up/sign-in), Firestore data fetching, and a clean Material 3 UI. Features a pizza catalogue with veg/spice tags, discount pricing, nutritional macros, and a detail screen.
+
+<p>
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white" />
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=flat-square&logo=dart&logoColor=white" />
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black" />
+  <img src="https://img.shields.io/badge/BLoC-purple?style=flat-square" />
+</p>
+
+---
+
 ### [Sistema de Gestão de Coworking](https://github.com/Rafaelclaro-pr/coworking-db-main)
 > Academic database project — Computer Engineering @ Universidade de Aveiro
 
